@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Android.Net;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Xamarin.Forms;
@@ -20,7 +23,10 @@ namespace SearchMovies
 
 		protected override void OnStart ()
 		{
-		    CheckConnection();
+		    AppCenter.Start("50ecfe3b-ed70-40e3-8d81-82c04ebbb84b",
+		        typeof(Analytics), typeof(Crashes));
+
+            CheckConnection();
 		}
 
 	    protected override void OnSleep ()
