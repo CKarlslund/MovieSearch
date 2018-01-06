@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SearchMovies.MovieDetailPage"
+             Padding="10">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Plot" FontAttributes="Bold"></Label>
+            <Label x:Name="PlotLabel"/>
+            
+            <Label Text="Actors" FontAttributes="Bold"></Label>
+            <Label x:Name="ActorsLabel"></Label>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<searchMovies:SearchPageBase xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:searchMovies="clr-namespace:SearchMovies;assembly=SearchMovies.Android"
+             x:Class="SearchMovies.MovieSearchPage"
+             Title="Search Movie">
+    <ContentPage.Content>
+        <StackLayout>
+            <ActivityIndicator 
+                x:Name="AIndicator"></ActivityIndicator>
+            <Entry 
+                x:Name="SearchInput"
+                Placeholder="Logan">
+            </Entry>
+            <Button
+                x:Name="SearchButton"
+                Text="Search Movie">
+            </Button>
+            <Label 
+                x:Name="ResultNumber">
+
+            </Label>
+            <ListView
+                x:Name="ResultsListView"
+                >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Title}" Detail="{Binding Year}"></TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</searchMovies:SearchPageBase>

@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchMovies.Android", "SearchMovies\SearchMovies.Android\SearchMovies.Android.csproj", "{9990096F-78ED-4203-B20C-000A33EE355D}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SearchMovies", "SearchMovies\SearchMovies\SearchMovies.shproj", "{D64479EF-1F92-4E13-A584-5A8767DAADA8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ED5BEA4D-0196-48D1-A5DB-67D7786A724D}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SearchMovies\SearchMovies\SearchMovies.projitems*{9990096f-78ed-4203-b20c-000a33ee355d}*SharedItemsImports = 4
+		SearchMovies\SearchMovies\SearchMovies.projitems*{d64479ef-1f92-4e13-a584-5a8767daada8}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9990096F-78ED-4203-B20C-000A33EE355D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9990096F-78ED-4203-B20C-000A33EE355D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9990096F-78ED-4203-B20C-000A33EE355D}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{9990096F-78ED-4203-B20C-000A33EE355D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9990096F-78ED-4203-B20C-000A33EE355D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9990096F-78ED-4203-B20C-000A33EE355D}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AE944210-B350-4D62-8573-301C1F4F8DE3}
+	EndGlobalSection
+EndGlobal
