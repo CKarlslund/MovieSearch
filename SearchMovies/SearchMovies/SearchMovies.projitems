@@ -17,13 +17,14 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Data\IMovieRepository.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\Rating.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\Movie.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchResult.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\Season.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SeriesEpisode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\Series.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\Rating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\Movie.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\SearchResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\Season.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\SeriesEpisode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\Series.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\MovieRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ViewModels\EpisodeViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -74,7 +75,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Data\Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)SeasonDetailPage.xaml">

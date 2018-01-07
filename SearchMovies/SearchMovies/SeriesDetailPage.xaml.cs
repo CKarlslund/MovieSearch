@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using SearchMovies.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,42 +7,50 @@ using Xamarin.Forms.Xaml;
 namespace SearchMovies
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SeriesDetailPage : ContentPage
+	public partial class SeriesDetailPage : SearchPageBase
 	{
-	    private IMovieRepository _repository;
+	    private readonly Series _series;
 
 		public SeriesDetailPage (Series series)
 		{
-            _repository = new MovieRepository();
+		    _series = series;
 
 			InitializeComponent ();
 
             AIndicator.IsRunning = true;
-		    Title = $"{series.Title} ({series.Year})";
 		    PlotLabel.Text = series.Plot;
 		    ActorsLabel.Text = series.Actors;
 
-            CreateSeasonList(series);
-		    
-            SeasonListView.ItemTapped += SeasonListViewOnItemTapped;
+		    SeasonListView.ItemTapped += SeasonListViewOnItemTapped;
+		    LinkButton.Clicked += LinkButtonOnClicked;
+
+            CreateSeasonList();		   
 		    AIndicator.IsRunning = false;
 		}
 
+	    private void LinkButtonOnClicked(object sender, EventArgs eventArgs)
+	    {
+            Device.OpenUri(new Uri("http://www.imdb.com/title/" + _series.imdbID));
+	    }
+
 	    private async void SeasonListViewOnItemTapped(object sender, ItemTappedEventArgs e)
 	    {
-	        var season = (SeasonSearch)e.Item;	        
-	        await Navigation.PushAsync(new SeasonDetailPage(season));
+	        if (IsConnected)
+	        {
+	            var season = (SeasonSearch)e.Item;
+	            await Navigation.PushAsync(new SeasonDetailPage(season));
+            }
         }
 
-	    private async void CreateSeasonList(Series series)
+	    private async void CreateSeasonList()
 	    {
-	        var seasons = int.Parse(series.totalSeasons);
+	        var seasons = int.Parse(_series.totalSeasons);
 
 	        var seasonList = new List<SeasonSearch>();
 
 	        for (var i = 1; i <= seasons; i++)
 	        {
-	            var season = await _repository.GetSeason(series.imdbID, i);
+	            var season = await Repository.GetSeason(_series.imdbID, i);
                 seasonList.Add(season);
 	        }
 
@@ -59,5 +61,17 @@ namespace SearchMovies
         }
 
 
-    }
+	    public override void UpdateElements()
+	    {
+	        if (IsConnected)
+	        {
+	            Title = $"{_series.Title} ({_series.Year})";
+	        }
+            else if (!IsConnected)
+	        {
+	            Title = $"{_series.Title} - Not Connected";
+	        }
+
+        }
+	}
 }

@@ -27,19 +27,22 @@ namespace SearchMovies
 	    {
 	        var searchItem = (Search)e.Item;
 	        var movieId = searchItem.imdbID;
-	        var details = await GetMovieDetails(movieId);
+	        var details = await Repository.GetMovieDetails(movieId);
 
 	        await Navigation.PushAsync(new MovieDetailPage(details));
         }
 
 	    private async void SearchButtonOnPressed(object sender, EventArgs eventArgs)
 	    {
-	        AIndicator.IsRunning = true;
-	        var searchResult = await Search("movie", SearchInput.Text, null);
+	        if (IsConnected)
+	        {
+	            AIndicator.IsRunning = true;
+	            var searchResult = await Repository.Search("movie", SearchInput.Text, null);
 
-	        ResultsListView.ItemsSource = searchResult.Search;
-	        ResultNumber.Text = "Results: " + searchResult.totalResults;
-	        AIndicator.IsRunning = false;
+	            ResultsListView.ItemsSource = searchResult.Search;
+	            ResultNumber.Text = "Results: " + searchResult.totalResults;
+	            AIndicator.IsRunning = false;
+            }
 	    }
 
         public override void UpdateElements()
