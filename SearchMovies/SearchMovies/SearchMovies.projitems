@@ -16,8 +16,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Data\DetailedSearch.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\SearchResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\IMovieRepository.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\Rating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\Movie.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\Season.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SeriesEpisode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\Series.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\MovieRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -30,6 +36,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SearchPageBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SeasonDetailPage.xaml.cs">
+      <DependentUpon>SeasonDetailPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SeriesDetailPage.xaml.cs">
+      <DependentUpon>SeriesDetailPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SeriesSearchPage.xaml.cs">
       <DependentUpon>SeriesSearchPage.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -49,6 +63,21 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)MovieDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)SeriesDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Data\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)SeasonDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

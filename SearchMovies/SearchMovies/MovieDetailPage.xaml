@@ -4,12 +4,14 @@
              x:Class="SearchMovies.MovieDetailPage"
              Padding="10">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Plot" FontAttributes="Bold"></Label>
-            <Label x:Name="PlotLabel"/>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Plot" FontAttributes="Bold"></Label>
+                <Label x:Name="PlotLabel"/>
             
-            <Label Text="Actors" FontAttributes="Bold"></Label>
-            <Label x:Name="ActorsLabel"></Label>
-        </StackLayout>
+                <Label Text="Actors" FontAttributes="Bold"></Label>
+                <Label x:Name="ActorsLabel"></Label>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

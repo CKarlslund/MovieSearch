@@ -12,7 +12,7 @@ namespace SearchMovies
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MovieDetailPage : ContentPage
 	{
-		public MovieDetailPage (DetailedMovieSearch details)
+		public MovieDetailPage (Movie details)
 		{
 			InitializeComponent ();
 

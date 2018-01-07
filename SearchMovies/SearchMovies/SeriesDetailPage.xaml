@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SearchMovies.SeriesDetailPage"
+             Padding="10">
+    <ContentPage.Content>
+<ListView x:Name="SeasonListView">
+        <ListView.Header>
+            <StackLayout Padding="10">
+                <ActivityIndicator x:Name="AIndicator"></ActivityIndicator>
+                <Label Text="Seasons" FontAttributes="Bold"></Label>
+                </StackLayout>
+        </ListView.Header>
+        <ListView.Footer>
+            <StackLayout Padding="10">
+                <Label Text="Plot" FontAttributes="Bold"></Label>
+                <Label x:Name="PlotLabel"/>
+                <Label Text="Actors" FontAttributes="Bold"></Label>
+                <Label x:Name="ActorsLabel"></Label>
+                <Label Text="Link to IMDB" FontAttributes="Bold"></Label>
+                <Label x:Name="ImdbLabel"></Label>
+            </StackLayout>
+        </ListView.Footer>
+    <ListView.ItemTemplate>
+        <DataTemplate>
+            <TextCell Text="{Binding Season}" Detail="{Binding Episodes}"></TextCell>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+        </ListView>
+
+        <!--<StackLayout>
+                <ActivityIndicator x:Name="AIndicator"></ActivityIndicator>
+                <Label Text="Seasons" FontAttributes="Bold"></Label>
+                <ListView x:Name="SeasonListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Season}" Detail="{Binding Episodes}"></TextCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <ScrollView>
+                    <Label Text="Plot" FontAttributes="Bold"></Label>
+                    <Label x:Name="PlotLabel"/>
+
+                    <Label Text="Actors" FontAttributes="Bold"></Label>
+                    <Label x:Name="ActorsLabel"></Label>
+                </ScrollView>
+            </StackLayout>-->
+       
+        
+    </ContentPage.Content>
+</ContentPage>
