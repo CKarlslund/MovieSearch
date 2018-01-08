@@ -17,7 +17,6 @@ namespace SearchMovies
 
 			InitializeComponent ();
 
-            AIndicator.IsRunning = true;
 		    PlotLabel.Text = series.Plot;
 		    ActorsLabel.Text = series.Actors;
 
@@ -25,7 +24,6 @@ namespace SearchMovies
 		    LinkButton.Clicked += LinkButtonOnClicked;
 
             CreateSeasonList();		   
-		    AIndicator.IsRunning = false;
 		}
 
 	    private void LinkButtonOnClicked(object sender, EventArgs eventArgs)
@@ -44,7 +42,9 @@ namespace SearchMovies
 
 	    private async void CreateSeasonList()
 	    {
-	        var seasons = int.Parse(_series.totalSeasons);
+	        AIndicator.IsRunning = true;
+
+            var seasons = int.Parse(_series.totalSeasons);
 
 	        var seasonList = new List<SeasonSearch>();
 
@@ -58,7 +58,8 @@ namespace SearchMovies
             {
                 SeasonListView.ItemsSource = seasonList;
             });
-        }
+	        AIndicator.IsRunning = false;
+	    }
 
 
 	    public override void UpdateElements()

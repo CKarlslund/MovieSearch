@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using SearchMovies.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -25,8 +20,8 @@ namespace SearchMovies
 
 	    private async void ResultSelected(object sender, ItemTappedEventArgs e)
 	    {
-	        var searchItem = (Search)e.Item;
-	        var movieId = searchItem.imdbID;
+	        var searchItem = (MovieViewModel)e.Item;
+	        var movieId = searchItem.ImdbId;
 	        var details = await Repository.GetMovieDetails(movieId);
 
 	        await Navigation.PushAsync(new MovieDetailPage(details));
@@ -39,7 +34,22 @@ namespace SearchMovies
 	            AIndicator.IsRunning = true;
 	            var searchResult = await Repository.Search("movie", SearchInput.Text, null);
 
-	            ResultsListView.ItemsSource = searchResult.Search;
+	            var movies = new List<MovieViewModel>();
+
+	            foreach (var search in searchResult.Search)
+	            {
+	                var viewModel = new MovieViewModel()
+	                {
+	                    Title = search.Title,
+                        Year = search.Year,
+                        HasWatched = HasWatched(search.imdbID),
+                        BackgroundColorProperty = HasWatched(search.imdbID) ? "Green" : "White",
+                        ImdbId = search.imdbID
+	                };
+                    movies.Add(viewModel);
+	            }
+
+	            ResultsListView.ItemsSource = movies;
 	            ResultNumber.Text = "Results: " + searchResult.totalResults;
 	            AIndicator.IsRunning = false;
             }

@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
-using Org.Apache.Http.Client.Params;
-using Plugin.Connectivity;
+﻿using Plugin.Connectivity;
 using SearchMovies.Data;
+using SearchMovies.Droid;
 using Xamarin.Forms;
 
 namespace SearchMovies
@@ -17,7 +10,7 @@ namespace SearchMovies
         public bool IsConnected;
         public IMovieRepository Repository;
 
-        public SearchPageBase()
+        protected SearchPageBase()
         {
             Repository = new MovieRepository();
         }
@@ -45,5 +38,30 @@ namespace SearchMovies
         }
 
         public abstract void UpdateElements();
+
+        public bool HasWatched(string imdbId)
+        {
+            var watchedIds = DependencyService.Get<ISaveAndLoad>().LoadImdbIds();
+
+            if (watchedIds != null && watchedIds.Contains(imdbId))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void AddToWatched(string imdbId)
+        {
+            if (!HasWatched(imdbId))
+            {
+                DependencyService.Get<ISaveAndLoad>().SaveImdbId(imdbId);
+            }
+        }
+
+        public void RemoveFromWatched(string imdbId)
+        {
+            DependencyService.Get<ISaveAndLoad>().RemoveImdbId(imdbId);
+        }
     }
 }

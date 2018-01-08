@@ -4,28 +4,26 @@
              xmlns:searchMovies="clr-namespace:SearchMovies;assembly=SearchMovies.Android"
              x:Class="SearchMovies.SeasonDetailPage"
              Padding="10">
-    <ContentPage.Content>
-        <StackLayout>
+    <StackLayout>
         <ActivityIndicator x:Name="AIndicator"></ActivityIndicator>
         <ListView x:Name="EpisodeListView" HasUnevenRows="true">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout Padding="10" Orientation="Vertical">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="{Binding Number}" LineBreakMode="WordWrap" FontAttributes="Bold"></Label>
-                                        <Label Text="{Binding Title}" LineBreakMode="WordWrap" FontAttributes="Bold"></Label>
-                                    </StackLayout>
-                                    <StackLayout>
-                                        <Label Text="{Binding Plot}" LineBreakMode="WordWrap"></Label>
-                                    </StackLayout>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout Padding="10" Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="{Binding Number}" LineBreakMode="WordWrap" FontAttributes="Bold"></Label>
+                                    <Label Text="{Binding Title}" LineBreakMode="WordWrap" FontAttributes="Bold"></Label>
                                 </StackLayout>
-                            </ViewCell.View>
-                        </ViewCell>
-                    </DataTemplate>
+                                <StackLayout>
+                                    <Label Text="{Binding Plot}" LineBreakMode="WordWrap"></Label>
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        </StackLayout>
-    </ContentPage.Content>
+    </StackLayout>
 </searchMovies:SearchPageBase>
