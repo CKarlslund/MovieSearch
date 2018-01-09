@@ -1,4 +1,5 @@
-﻿using Plugin.Connectivity;
+﻿using System.Threading.Tasks;
+using Plugin.Connectivity;
 using SearchMovies.Data;
 using SearchMovies.Droid;
 using Xamarin.Forms;
@@ -24,6 +25,8 @@ namespace SearchMovies
                 IsConnected = arg;
                 UpdateElements();
             });
+
+            UpdateElements();
         }
 
         private void CheckConnection()
@@ -39,9 +42,9 @@ namespace SearchMovies
 
         public abstract void UpdateElements();
 
-        public bool HasWatched(string imdbId)
+        public async Task<bool> HasWatched(string imdbId)
         {
-            var watchedIds = DependencyService.Get<ISaveAndLoad>().LoadImdbIds();
+            var watchedIds = await DependencyService.Get<ISaveAndLoad>().LoadImdbIds();
 
             if (watchedIds != null && watchedIds.Contains(imdbId))
             {
@@ -51,11 +54,12 @@ namespace SearchMovies
             return false;
         }
 
-        public void AddToWatched(string imdbId)
+        public async void AddToWatched(string imdbId)
         {
-            if (!HasWatched(imdbId))
+            var hasWatched = await HasWatched(imdbId);
+            if (!hasWatched)
             {
-                DependencyService.Get<ISaveAndLoad>().SaveImdbId(imdbId);
+                await DependencyService.Get<ISaveAndLoad>().SaveImdbId(imdbId);
             }
         }
 

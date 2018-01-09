@@ -18,15 +18,16 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Data\IMovieRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\ISaveAndLoad.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\Rating.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\Movie.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\SearchResult.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\Season.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\SeriesEpisode.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\Series.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SearchModels\Rating.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SearchModels\Movie.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SearchModels\SearchResult.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SearchModels\Season.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SearchModels\SeriesEpisode.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SearchModels\Series.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\MovieRepository.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\ViewModels\EpisodeViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Data\ViewModels\MovieViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ViewModel\EpisodeViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ViewModel\HomeViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ViewModel\MovieViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -78,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Data\CustomRenderers\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Data\Models\SearchModels\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Data\Model\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)SeasonDetailPage.xaml">

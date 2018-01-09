@@ -7,18 +7,13 @@ namespace SearchMovies
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MovieDetailPage : SearchPageBase
 	{
-	    private readonly string _imdbId;
+	    private readonly Movie _details;
 
 		public MovieDetailPage (Movie details)
 		{
 			InitializeComponent ();
 
-		    _imdbId = details.imdbID;
-
-		    Title = $"{details.Title} ({details.Year})";
-		    PlotLabel.Text = details.Plot;
-		    ActorsLabel.Text = details.Actors;
-		    WatchSwitch.IsToggled = HasWatched(details.imdbID);
+		    _details = details;
 
             WatchSwitch.Toggled += WatchSwitchOnToggled;
 		}
@@ -27,16 +22,20 @@ namespace SearchMovies
 	    {
 	        if (toggledEventArgs.Value)
 	        {
-	            AddToWatched(_imdbId);
+	            AddToWatched(_details.imdbID);
 	        }
 	        else
 	        {
-	            RemoveFromWatched(_imdbId);
+	            RemoveFromWatched(_details.imdbID);
 	        }
 	    }
 
-	    public override void UpdateElements()
+	    public override async void UpdateElements()
 	    {
-	    }
+	        Title = $"{_details.Title} ({_details.Year})";
+	        PlotLabel.Text = _details.Plot;
+	        ActorsLabel.Text = _details.Actors;
+	        WatchSwitch.IsToggled = await HasWatched(_details.imdbID);
+        }
 	}
 }

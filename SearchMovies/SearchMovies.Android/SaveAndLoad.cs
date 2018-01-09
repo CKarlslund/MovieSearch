@@ -25,9 +25,9 @@ namespace SearchMovies.Droid
         {
             try
             {
-                    using (StreamWriter streamWriter = File.AppendText(_filePath))
+                    using (var sw = File.AppendText(_filePath))
                     {
-                        await streamWriter.WriteLineAsync(imdbId);
+                        await sw.WriteLineAsync(imdbId);
                     }
 
                 return true;
@@ -40,30 +40,74 @@ namespace SearchMovies.Droid
             return false;
         }
 
-        public string LoadImdbIds()
+        public async Task<string> LoadImdbIds()
         {
             try
             {
-                var file =  System.IO.File.ReadAllText(_filePath);
+                string file;
 
-                return file;
+                if (File.Exists(_filePath))
+                {
+                    using (var sr = new StreamReader(_filePath))
+                    {
+                        file = await sr.ReadToEndAsync();
+                    }
+
+                    return file;
+                }
+                else
+                {
+                    Analytics.TrackEvent("LoadImdbs", new Dictionary<string, string>(){{"Error", "File not found"}});
+                }
             }
             catch (Exception e)
             {
-                Analytics.SetEnabledAsync(true);
-                Analytics.TrackEvent("Read file", new Dictionary<string, string>() { { "Read file", e.Message } });
+                Analytics.TrackEvent("Read file", new Dictionary<string, string>() { { "Read file error", e.Message } });
                 return null;
             }
 
+            return null;
         }
 
-        public void RemoveImdbId(string imdbId)
+        public async void RemoveImdbId(string imdbId)
         {
             try
             {
-                var linesToKeep = File.ReadLines(_filePath).Where(l => l != imdbId);
+                //string line_to_delete = imdbId;
 
-                File.WriteAllLines(_filePath, linesToKeep);
+                //string[] array;
+
+                ////remove line
+                //using (var sr = new StreamReader(_filePath))
+                //{
+                //    string line;
+                //    while ((line = sr.ReadLineAsync().Result) != null)
+                //    {
+                //        if (String.CompareOrdinal(line, line_to_delete) == 0)
+                //            continue;
+
+                //        await writer.WriteLineAsync(line);
+                //    }
+                //}              
+
+                string newFile = "";
+                using (StreamReader sr = File.OpenText(_filePath))
+                {
+                    string strOldText;
+                    while ((strOldText = await sr.ReadLineAsync()) != null)
+                    {
+                        if (!strOldText.Contains(imdbId))
+                        {
+                            newFile += strOldText + Environment.NewLine;
+                        }
+                    }
+                }
+
+                using (StreamWriter sw = new StreamWriter(_filePath, false))
+                {
+                    //File.WriteAllText(_filePath, newFile);
+                    await sw.WriteAsync(newFile);
+                }
             }
             catch (Exception e)
             {

@@ -42,8 +42,8 @@ namespace SearchMovies
 	                {
 	                    Title = search.Title,
                         Year = search.Year,
-                        HasWatched = HasWatched(search.imdbID),
-                        BackgroundColorProperty = HasWatched(search.imdbID) ? "Green" : "White",
+                        HasWatched = await HasWatched(search.imdbID),
+                        BackgroundColorProperty = await HasWatched(search.imdbID) ? "DarkSeaGreen" : "White",
                         ImdbId = search.imdbID
 	                };
                     movies.Add(viewModel);

@@ -2,21 +2,33 @@
 <searchMovies:SearchPageBase xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:searchMovies="clr-namespace:SearchMovies;assembly=SearchMovies.Android"
+             xmlns:local="clr-namespace:SearchMovies.Data.ViewModel;assembly=SearchMovies.Android"
              x:Class="SearchMovies.SeasonDetailPage"
              Padding="10">
+
+    <searchMovies:SearchPageBase.BindingContext>
+        <local:HomeViewModel></local:HomeViewModel>
+    </searchMovies:SearchPageBase.BindingContext>
+
     <StackLayout>
         <ActivityIndicator x:Name="AIndicator"></ActivityIndicator>
-        <ListView x:Name="EpisodeListView" HasUnevenRows="true">
+        <ListView x:Name="EpisodeListView" 
+                  HasUnevenRows="true"
+                  ItemsSource="{Binding EpisodeViewModels}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <ViewCell.View>
-                            <StackLayout Padding="10" Orientation="Vertical">
+                            <StackLayout Padding="10" Orientation="Vertical" BackgroundColor="{Binding BackgroundColorProperty}">
                                 <StackLayout Orientation="Horizontal">
                                     <Label Text="{Binding Number}" LineBreakMode="WordWrap" FontAttributes="Bold"></Label>
                                     <Label Text="{Binding Title}" LineBreakMode="WordWrap" FontAttributes="Bold"></Label>
                                 </StackLayout>
-                                <StackLayout>
+                                <StackLayout IsVisible="{Binding PlotIsVisible}">
+                                    <Switch
+                                        IsToggled="{Binding HasWatched}" 
+                                        Toggled="Switch_OnToggled">
+                                    </Switch>
                                     <Label Text="{Binding Plot}" LineBreakMode="WordWrap"></Label>
                                 </StackLayout>
                             </StackLayout>
