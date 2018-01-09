@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AppCenter.Analytics;
 using SearchMovies.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -28,6 +29,7 @@ namespace SearchMovies
 
 	    private void LinkButtonOnClicked(object sender, EventArgs eventArgs)
 	    {
+            Analytics.TrackEvent("External Link Button Clicked");
             Device.OpenUri(new Uri("http://www.imdb.com/title/" + _series.imdbID));
 	    }
 
@@ -36,6 +38,9 @@ namespace SearchMovies
 	        if (IsConnected)
 	        {
 	            var season = (SeasonSearch)e.Item;
+
+	            Analytics.TrackEvent("Season Item Tapped", new Dictionary<string, string>() { { "Season", season.Title + " Season " + season.Season } });
+
 	            await Navigation.PushAsync(new SeasonDetailPage(season));
             }
         }

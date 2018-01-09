@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AppCenter.Analytics;
 using SearchMovies.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,6 +16,7 @@ namespace SearchMovies
 	    public SeriesSearchPage()
 	    {
 	        this.InitializeComponent();
+            Analytics.TrackEvent("Entered Series Search");
 
 	        SearchInput.Completed += SearchButtonOnPressed;
 	        SearchButton.Pressed += SearchButtonOnPressed;
@@ -25,6 +27,9 @@ namespace SearchMovies
 	    {
 	        var searchItem = (Search)e.Item;
 	        var seriesId = searchItem.imdbID;
+
+            Analytics.TrackEvent("Result selected.", new Dictionary<string, string>(){{"ImdbId", seriesId}});
+
 	        var details = await Repository.GetSeriesDetails(seriesId);
 
 	        await Navigation.PushAsync(new SeriesDetailPage(details));
@@ -37,7 +42,9 @@ namespace SearchMovies
 	            AIndicator.IsRunning = true;
 	            var searchResult = await Repository.Search("series", SearchInput.Text, null);
 
-	            ResultsListView.ItemsSource = searchResult.Search;
+                Analytics.TrackEvent("Search button pressed", new Dictionary<string, string>() { {"Search word", SearchInput.Text},{"Response", searchResult.Response } });
+
+                ResultsListView.ItemsSource = searchResult.Search;
 	            ResultNumber.Text = "Results: " + searchResult.totalResults;
 	            AIndicator.IsRunning = false;
             }

@@ -34,7 +34,7 @@ namespace SearchMovies.Droid
             }
             catch (Exception e)
             {
-                Analytics.TrackEvent("Write to file", new Dictionary<string, string>(){{"FileError", e.Message}});
+                Analytics.TrackEvent("Save ImdbId", new Dictionary<string, string>(){{"Error", e.Message}});
             }
 
             return false;
@@ -57,12 +57,12 @@ namespace SearchMovies.Droid
                 }
                 else
                 {
-                    Analytics.TrackEvent("LoadImdbs", new Dictionary<string, string>(){{"Error", "File not found"}});
+                    Analytics.TrackEvent("Load Imdbs", new Dictionary<string, string>(){{"Error", "File not found"}});
                 }
             }
             catch (Exception e)
             {
-                Analytics.TrackEvent("Read file", new Dictionary<string, string>() { { "Read file error", e.Message } });
+                Analytics.TrackEvent("Load Imdbids", new Dictionary<string, string>() { { "Error", e.Message } });
                 return null;
             }
 
@@ -73,23 +73,6 @@ namespace SearchMovies.Droid
         {
             try
             {
-                //string line_to_delete = imdbId;
-
-                //string[] array;
-
-                ////remove line
-                //using (var sr = new StreamReader(_filePath))
-                //{
-                //    string line;
-                //    while ((line = sr.ReadLineAsync().Result) != null)
-                //    {
-                //        if (String.CompareOrdinal(line, line_to_delete) == 0)
-                //            continue;
-
-                //        await writer.WriteLineAsync(line);
-                //    }
-                //}              
-
                 string newFile = "";
                 using (StreamReader sr = File.OpenText(_filePath))
                 {
@@ -111,7 +94,7 @@ namespace SearchMovies.Droid
             }
             catch (Exception e)
             {
-                Analytics.TrackEvent("Remove id", new Dictionary<string, string>() { { "Remove from file", e.Message } });
+                Analytics.TrackEvent("Remove ImdbId", new Dictionary<string, string>() { { "Error", e.Message } });
             }
         }
     }

@@ -1,4 +1,6 @@
-﻿using SearchMovies.Data;
+﻿using System.Collections.Generic;
+using Microsoft.AppCenter.Analytics;
+using SearchMovies.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,6 +22,8 @@ namespace SearchMovies
 
 	    private void WatchSwitchOnToggled(object sender, ToggledEventArgs toggledEventArgs)
 	    {
+            Analytics.TrackEvent("Watched switch toggled.",new Dictionary<string, string>(){{"Value", toggledEventArgs.Value.ToString()}});
+
 	        if (toggledEventArgs.Value)
 	        {
 	            AddToWatched(_details.imdbID);

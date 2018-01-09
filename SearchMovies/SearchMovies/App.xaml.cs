@@ -45,6 +45,8 @@ namespace SearchMovies
 	        {
 	            var isConnected = CrossConnectivity.Current.IsConnected;
 	            MessagingCenter.Send<App, bool>(this, "ConnectionChanged", isConnected);
+
+                Analytics.TrackEvent("Connection changed", new Dictionary<string, string>(){{"Is Connected", isConnected.ToString()}});
 	        };
 	    }
     }

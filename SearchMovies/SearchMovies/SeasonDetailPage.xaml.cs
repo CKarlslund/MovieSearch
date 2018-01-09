@@ -26,8 +26,9 @@ namespace SearchMovies
 
 	    private void EpisodeListViewOnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            Analytics.TrackEvent("EpisodeList tapped");
             var episodeViewModel = (EpisodeViewModel) e.Item;
+
+            Analytics.TrackEvent("EpisodeList tapped", new Dictionary<string, string>() { { "Episode", episodeViewModel.ImdbId } });
             episodeViewModel.PlotIsVisible = !episodeViewModel.PlotIsVisible;
 
             var indexOfEpisode = HomeViewModel.EpisodeViewModels.IndexOf(episodeViewModel);

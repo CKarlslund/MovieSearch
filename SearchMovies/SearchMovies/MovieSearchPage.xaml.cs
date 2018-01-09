@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AppCenter.Analytics;
 using SearchMovies.Data;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -12,6 +13,7 @@ namespace SearchMovies
 		public MovieSearchPage ()
 		{
 		    this.InitializeComponent();
+            Analytics.TrackEvent("Entered Movie Search");
 
 		    SearchInput.Completed += SearchButtonOnPressed;
 		    SearchButton.Pressed += SearchButtonOnPressed;
@@ -22,7 +24,10 @@ namespace SearchMovies
 	    {
 	        var searchItem = (MovieViewModel)e.Item;
 	        var movieId = searchItem.ImdbId;
-	        var details = await Repository.GetMovieDetails(movieId);
+
+	        Analytics.TrackEvent("ResultSelected", new Dictionary<string, string>() { { "ImdbId", movieId } });
+
+            var details = await Repository.GetMovieDetails(movieId);
 
 	        await Navigation.PushAsync(new MovieDetailPage(details));
         }
@@ -34,7 +39,13 @@ namespace SearchMovies
 	            AIndicator.IsRunning = true;
 	            var searchResult = await Repository.Search("movie", SearchInput.Text, null);
 
-	            var movies = new List<MovieViewModel>();
+	            Analytics.TrackEvent("Search button pressed.", new Dictionary<string, string>()
+	            {
+	                { "SearchWord", SearchInput.Text },
+	                { "SearchResponse", searchResult.Response}
+	            });
+
+                var movies = new List<MovieViewModel>();
 
 	            foreach (var search in searchResult.Search)
 	            {
