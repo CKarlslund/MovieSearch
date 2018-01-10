@@ -16,6 +16,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Data\CustomRenderer\AllCapsLabel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\CustomRenderer\CustomFrame.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\IMovieRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\ISaveAndLoad.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Data\Model\SearchModels\Rating.cs" />
@@ -78,7 +80,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Data\CustomRenderers\" />
     <Folder Include="$(MSBuildThisFileDirectory)Data\Model\" />
   </ItemGroup>
   <ItemGroup>

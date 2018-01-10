@@ -2,6 +2,7 @@
 <searchMovies:SearchPageBase xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:searchMovies="clr-namespace:SearchMovies;assembly=SearchMovies.Android"
+             xmlns:customRenderer="clr-namespace:SearchMovies.Data.CustomRenderer;assembly=SearchMovies.Android"
              x:Class="SearchMovies.SeriesDetailPage"
              Padding="10">
     <ContentPage.Content>
@@ -14,9 +15,9 @@
         </ListView.Header>
         <ListView.Footer>
             <StackLayout Padding="10">
-                <Label Text="Plot" FontAttributes="Bold"></Label>
+                <customRenderer:AllCapsLabel Text="Plot" FontAttributes="Bold"></customRenderer:AllCapsLabel>
                 <Label x:Name="PlotLabel"/>
-                <Label Text="Actors" FontAttributes="Bold"></Label>
+                <customRenderer:AllCapsLabel Text="Actors" FontAttributes="Bold"></customRenderer:AllCapsLabel>
                 <Label x:Name="ActorsLabel"></Label>
                 <Button x:Name="LinkButton" Text="Link to IMDB"></Button>
             </StackLayout>

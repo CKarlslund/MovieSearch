@@ -2,6 +2,7 @@
 <searchMovies:SearchPageBase xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:searchMovies="clr-namespace:SearchMovies;assembly=SearchMovies.Android"
+             xmlns:customRenderer="clr-namespace:SearchMovies.Data.CustomRenderer;assembly=SearchMovies.Android"
              x:Class="SearchMovies.MovieDetailPage"
              Padding="10">
     <ScrollView>
@@ -10,10 +11,10 @@
                 <Label Text="Watch status" FontAttributes="Bold"></Label>
                 <Switch x:Name="WatchSwitch"></Switch>
             </StackLayout>
-            <Label Text="Plot" FontAttributes="Bold"></Label>
+            <customRenderer:AllCapsLabel Text="Plot" FontAttributes="Bold"></customRenderer:AllCapsLabel>
             <Label x:Name="PlotLabel"/>
 
-            <Label Text="Actors" FontAttributes="Bold"></Label>
+            <customRenderer:AllCapsLabel Text="Actors" FontAttributes="Bold"></customRenderer:AllCapsLabel>
             <Label x:Name="ActorsLabel"></Label>
         </StackLayout>
     </ScrollView>
