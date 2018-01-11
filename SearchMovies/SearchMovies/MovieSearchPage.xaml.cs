@@ -22,6 +22,8 @@ namespace SearchMovies
 
 	    private async void ResultSelected(object sender, ItemTappedEventArgs e)
 	    {
+	        AIndicator.IsRunning = true;
+
 	        var searchItem = (MovieViewModel)e.Item;
 	        var movieId = searchItem.ImdbId;
 
@@ -29,8 +31,18 @@ namespace SearchMovies
 
             var details = await Repository.GetMovieDetails(movieId);
 
-	        await Navigation.PushAsync(new MovieDetailPage(details));
-        }
+	        if (details.Response == "True")
+	        {
+	            await Navigation.PushAsync(new MovieDetailPage(details));
+            }
+	        else
+	        {
+	            await DisplayAlert("API problem", "Something went wrong when connecting to the API", "Got it");
+                Analytics.TrackEvent("Response was false");
+            }
+
+	        AIndicator.IsRunning = false;
+	    }
 
 	    private async void SearchButtonOnPressed(object sender, EventArgs eventArgs)
 	    {
@@ -38,29 +50,36 @@ namespace SearchMovies
 	        {
 	            AIndicator.IsRunning = true;
 	            var searchResult = await Repository.Search("movie", SearchInput.Text, null);
-
 	            Analytics.TrackEvent("Search button pressed.", new Dictionary<string, string>()
 	            {
-	                { "SearchWord", SearchInput.Text },
-	                { "SearchResponse", searchResult.Response}
+	                { "Search Word", SearchInput.Text },
+	                { "Search Response", searchResult.Response}
 	            });
 
-                var movies = new List<MovieViewModel>();
-
-	            foreach (var search in searchResult.Search)
+	            if (searchResult.Response == "True")
 	            {
-	                var viewModel = new MovieViewModel()
-	                {
-	                    Title = search.Title,
-                        Year = search.Year,
-                        HasWatched = await HasWatched(search.imdbID),
-                        BackgroundColorProperty = await HasWatched(search.imdbID) ? "DarkSeaGreen" : "White",
-                        ImdbId = search.imdbID
-	                };
-                    movies.Add(viewModel);
-	            }
+	                var movies = new List<MovieViewModel>();
 
-	            ResultsListView.ItemsSource = movies;
+	                foreach (var search in searchResult.Search)
+	                {
+	                    var viewModel = new MovieViewModel()
+	                    {
+	                        Title = search.Title,
+	                        Year = search.Year,
+	                        HasWatched = await HasWatched(search.imdbID),
+	                        BackgroundColorProperty = await HasWatched(search.imdbID) ? "DarkSeaGreen" : "White",
+	                        ImdbId = search.imdbID
+	                    };
+	                    movies.Add(viewModel);
+	                }
+
+	                ResultsListView.ItemsSource = movies;
+                }
+	            else
+	            {
+	                await DisplayAlert("API problem", "Something went wrong when connecting to the API", "Got it");
+                }
+
 	            ResultNumber.Text = "Results: " + searchResult.totalResults;
 	            AIndicator.IsRunning = false;
             }

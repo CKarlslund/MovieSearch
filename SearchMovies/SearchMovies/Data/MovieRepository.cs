@@ -35,7 +35,7 @@ namespace SearchMovies.Data
             {
                 Analytics.TrackEvent("GetSeason", new Dictionary<string, string>() { { "ResponseError", e.Message } });
 
-                return new SeasonSearch(){Response = "false"}; //TODO Check if true
+                return new SeasonSearch(){Response = "False"}; //TODO Check if true
             }
         }
 
@@ -53,7 +53,7 @@ namespace SearchMovies.Data
             catch (Exception e)
             {
                 Analytics.TrackEvent("GetEpisode", new Dictionary<string, string>() { { "ResponseError", e.Message } });
-                return new SeriesEpisode(){Response = "false"};
+                return new SeriesEpisode(){Response = "False"};
             }
         }
 
@@ -80,13 +80,13 @@ namespace SearchMovies.Data
                 }
                 else
                 {
-                    return new SearchResult { totalResults = "0", Response = "false" };
+                    return new SearchResult { totalResults = "0", Response = "False" };
                 }
             }
             catch (Exception e)
             {
                 Analytics.TrackEvent("Search", new Dictionary<string, string>() { { "ResponseError", e.Message } });
-                return new SearchResult { totalResults = "0", Response = "false" };
+                return new SearchResult { totalResults = "0", Response = "False" };
             }
         }
 
@@ -104,7 +104,7 @@ namespace SearchMovies.Data
             catch (Exception e)
             {
                 Analytics.TrackEvent("GetMovieDetails", new Dictionary<string, string>() { { "ResponseError", e.Message } });
-                return new Movie(){Response = "false"};
+                return new Movie(){Response = "False"};
             }            
         }
 
@@ -121,7 +121,7 @@ namespace SearchMovies.Data
             catch (Exception e)
             {
                 Analytics.TrackEvent("Search", new Dictionary<string, string>() { { "ResponseError", e.Message } });
-                return new Series(){Response = "GetSeriesDetails"};
+                return new Series(){Response = "False"};
             }
         }
     }

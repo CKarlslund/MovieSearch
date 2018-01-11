@@ -56,8 +56,17 @@ namespace SearchMovies
 	        for (var i = 1; i <= seasons; i++)
 	        {
 	            var season = await Repository.GetSeason(_series.imdbID, i);
-                seasonList.Add(season);
-	        }
+
+	            if (season.Response == "True")
+	            {
+	                seasonList.Add(season);
+
+                }
+	            else
+	            {
+	               await DisplayAlert("API problem", "Something went wrong when accessing the API", "Got it");
+	            }
+            }
 
             Device.BeginInvokeOnMainThread(() =>
             {

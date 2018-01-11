@@ -6,48 +6,27 @@
              x:Class="SearchMovies.SeriesDetailPage"
              Padding="10">
     <ContentPage.Content>
-<ListView x:Name="SeasonListView">
-        <ListView.Header>
-            <StackLayout Padding="10">
-                <ActivityIndicator x:Name="AIndicator"></ActivityIndicator>
-                <Label Text="Seasons" FontAttributes="Bold"></Label>
+        <ListView x:Name="SeasonListView">
+            <ListView.Header>
+                <StackLayout Padding="10">
+                    <ActivityIndicator x:Name="AIndicator"></ActivityIndicator>
+                    <Label Text="Seasons" FontAttributes="Bold"></Label>
                 </StackLayout>
-        </ListView.Header>
-        <ListView.Footer>
-            <StackLayout Padding="10">
-                <customRenderer:AllCapsLabel Text="Plot" FontAttributes="Bold"></customRenderer:AllCapsLabel>
-                <Label x:Name="PlotLabel"/>
-                <customRenderer:AllCapsLabel Text="Actors" FontAttributes="Bold"></customRenderer:AllCapsLabel>
-                <Label x:Name="ActorsLabel"></Label>
-                <Button x:Name="LinkButton" Text="Link to IMDB"></Button>
-            </StackLayout>
-        </ListView.Footer>
-    <ListView.ItemTemplate>
-        <DataTemplate>
-            <TextCell Text="{Binding Season}" Detail="{Binding Episodes}"></TextCell>
-        </DataTemplate>
-    </ListView.ItemTemplate>
-        </ListView>
-
-        <!--<StackLayout>
-                <ActivityIndicator x:Name="AIndicator"></ActivityIndicator>
-                <Label Text="Seasons" FontAttributes="Bold"></Label>
-                <ListView x:Name="SeasonListView">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Season}" Detail="{Binding Episodes}"></TextCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <ScrollView>
-                    <Label Text="Plot" FontAttributes="Bold"></Label>
+            </ListView.Header>
+            <ListView.Footer>
+                <StackLayout Padding="10">
+                    <customRenderer:AllCapsLabel Text="Plot" FontAttributes="Bold"></customRenderer:AllCapsLabel>
                     <Label x:Name="PlotLabel"/>
-
-                    <Label Text="Actors" FontAttributes="Bold"></Label>
+                    <customRenderer:AllCapsLabel Text="Actors" FontAttributes="Bold"></customRenderer:AllCapsLabel>
                     <Label x:Name="ActorsLabel"></Label>
-                </ScrollView>
-            </StackLayout>-->
-       
-        
+                    <Button x:Name="LinkButton" Text="Link to IMDB"></Button>
+                </StackLayout>
+            </ListView.Footer>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Season}" Detail="{Binding Episodes}" TextColor="Black"></TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </searchMovies:SearchPageBase>

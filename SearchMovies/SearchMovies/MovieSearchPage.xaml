@@ -12,11 +12,13 @@
             </ActivityIndicator>
             <Entry 
                 x:Name="SearchInput"
-                Placeholder="Logan">
+                Placeholder="Bend It Like Beckham">
             </Entry>
             <Button
                 x:Name="SearchButton"
-                Text="Search Movie">
+                Text="Search Movie"
+                TextColor="White"
+                BackgroundColor="Black">
             </Button>
             <Label 
                 x:Name="ResultNumber">
@@ -28,8 +30,8 @@
                         <ViewCell>
                             <Frame HasShadow="true" BackgroundColor="{Binding BackgroundColorProperty}" Padding="10">
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding Title}" FontAttributes="Bold"></Label>
-                                    <Label Text="{Binding Year, StringFormat= '({0})'}"></Label>
+                                    <Label Text="{Binding Title}" FontAttributes="Bold" TextColor="Black"></Label>
+                                    <Label Text="{Binding Year, StringFormat= '({0})'}" TextColor="Black"></Label>
                                 </StackLayout>
                             </Frame>
                         </ViewCell>

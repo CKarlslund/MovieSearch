@@ -47,17 +47,25 @@ namespace SearchMovies
 	        {
 	            var detailedEpisode = await Repository.GetEpisode(episode.imdbID);
 
-	            var episodeViewModel = new EpisodeViewModel
+	            if (detailedEpisode.Response == "True")
 	            {
-	                Number = detailedEpisode.Episode,
-	                Plot = detailedEpisode.Plot,
-	                Title = detailedEpisode.Title,
-                    ImdbId = detailedEpisode.imdbID,
-                    HasWatched = await HasWatched(detailedEpisode.imdbID),
-                    BackgroundColorProperty = await HasWatched(detailedEpisode.imdbID) ? "darkSeaGreen" : "white",
-	                PlotIsVisible = false
-	            };
-	            models.Add(episodeViewModel);
+	                var episodeViewModel = new EpisodeViewModel
+	                {
+	                    Number = detailedEpisode.Episode,
+	                    Plot = detailedEpisode.Plot,
+	                    Title = detailedEpisode.Title,
+	                    ImdbId = detailedEpisode.imdbID,
+	                    HasWatched = await HasWatched(detailedEpisode.imdbID),
+	                    BackgroundColorProperty = await HasWatched(detailedEpisode.imdbID) ? "darkSeaGreen" : "white",
+	                    PlotIsVisible = false
+	                };
+	                models.Add(episodeViewModel);
+                }
+	            else
+	            {
+	                await DisplayAlert("API problem", "Something went wrong when connecting to the API", "Got it");
+	            }
+
 	        }
 
 	        HomeViewModel.EpisodeViewModels = models;
@@ -92,14 +100,20 @@ namespace SearchMovies
 	            if (!episode.HasWatched && hasWatchedInFile)
 	            {
 	                RemoveFromWatched(episode.ImdbId);
+	                episode.BackgroundColorProperty = "White";
 	            }
 	            else
 	            {
 	                AddToWatched(episode.ImdbId);
-	            }
-	        }
+	                episode.BackgroundColorProperty = "DarkSeaGreen";
 
-            UpdateElements();
+	            }
+
+                //Update binding
+                var i = HomeViewModel.EpisodeViewModels.IndexOf(episode);
+                HomeViewModel.EpisodeViewModels.Remove(episode);
+                HomeViewModel.EpisodeViewModels.Insert(i, episode);
+            }
 	    }
 	}
 }

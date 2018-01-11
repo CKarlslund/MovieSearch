@@ -2,6 +2,7 @@
 
 using Android.App;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
@@ -21,6 +22,10 @@ namespace SearchMovies.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
+
+            Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.SetStatusBarColor(Color.Black);
         }
     }
 }

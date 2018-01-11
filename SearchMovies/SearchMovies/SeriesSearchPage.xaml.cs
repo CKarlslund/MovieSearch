@@ -32,7 +32,15 @@ namespace SearchMovies
 
 	        var details = await Repository.GetSeriesDetails(seriesId);
 
-	        await Navigation.PushAsync(new SeriesDetailPage(details));
+	        if (details.Response == "True")
+	        {
+	            await Navigation.PushAsync(new SeriesDetailPage(details));
+            }
+	        else
+	        {
+	            await DisplayAlert("API problem", "Something went wrong when connecting to the API", "Got it");
+                Analytics.TrackEvent("Response false");
+            }
 	    }
 
 	    private async void SearchButtonOnPressed(object sender, EventArgs eventArgs)
@@ -40,13 +48,20 @@ namespace SearchMovies
             if (IsConnected)
             { 
 	            AIndicator.IsRunning = true;
-	            var searchResult = await Repository.Search("series", SearchInput.Text, null);
+                var searchResult = await Repository.Search("series", SearchInput.Text, null);
+                Analytics.TrackEvent("Search button pressed", new Dictionary<string, string>() { { "Search word", SearchInput.Text }, { "Response", searchResult.Response } });
 
-                Analytics.TrackEvent("Search button pressed", new Dictionary<string, string>() { {"Search word", SearchInput.Text},{"Response", searchResult.Response } });
+                if (searchResult.Response == "True")
+                {
+                    ResultsListView.ItemsSource = searchResult.Search;
+                    ResultNumber.Text = "Results: " + searchResult.totalResults;
+                }
+                else
+                {
+                    await DisplayAlert("API problem", "Something went wrong when connecting to the API", "Got it");
+                }
 
-                ResultsListView.ItemsSource = searchResult.Search;
-	            ResultNumber.Text = "Results: " + searchResult.totalResults;
-	            AIndicator.IsRunning = false;
+                AIndicator.IsRunning = false;
             }
         }
 

@@ -16,18 +16,19 @@
             </Entry>
             <Button
                 x:Name="SearchButton"
-                Text="Search Series">
+                Text="Search Series"
+                TextColor="White"
+                BackgroundColor="Black">
             </Button>
             <Label 
                 x:Name="ResultNumber">
 
             </Label>
             <ListView
-                x:Name="ResultsListView"
-            >
+                x:Name="ResultsListView">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Title}" Detail="{Binding Year}"></TextCell>
+                        <TextCell Text="{Binding Title}" Detail="{Binding Year}" TextColor="Black"></TextCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
